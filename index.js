@@ -2,6 +2,7 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const fs = require('fs');
 const request = require('request')
 const app = express()
 
@@ -32,8 +33,10 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         if (event.message && event.message.text) {
-            let text = event.message.text
-            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+            let text = event.message.text.substring(0, 200)
+            //sendTextMessage(sender, "Text received, echo: " + text)
+            const messageText = getMessageText();
+            sendTextMessage(sender, "received: " + text + '\n' + messageText);
         }
     }
     res.sendStatus(200)
@@ -64,3 +67,26 @@ function sendTextMessage(sender, text) {
         }
     })
 }
+
+// END BOILERPLATE
+
+const PATH = './text.txt'
+
+function writeToFile({path, content}) {
+  fs.writeFile(path, content, function(err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("The file was saved!");
+  }); 
+}
+
+function getMessageText() {
+  return fs.readFileSync(PATH)
+}
+
+//const foo = {a:4, b:5};
+
+//writeToFile({path: './test.txt', content: JSON.stringify(foo)});
+//writeToFile({path: './test.txt', content: new Date()});
+
