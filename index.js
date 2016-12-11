@@ -70,7 +70,7 @@ function sendTextMessage(sender, text) {
 
 // END BOILERPLATE
 
-const PATH = './text.txt'
+const PATH = './test.txt'
 
 function writeToFile({path, content}) {
   fs.writeFile(path, content, function(err) {
