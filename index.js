@@ -83,7 +83,9 @@ function writeToFile({path, content}) {
 function getMessageText() {
   const database = JSON.parse(fs.readFileSync(PATH));
   const data = randomElement(database);
-  return JSON.stringify(data, null, '\t');
+  const text = JSON.stringify(data, null, '\t');
+  console.log(text);
+  return text;
 }
 
 function randomElement(arr) {
