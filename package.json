@@ -18,7 +18,10 @@
   "homepage": "https://github.com/lowellbander/highlights#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cheerio": "^0.22.0",
     "express": "^4.14.0",
-    "request": "^2.79.0"
+    "fs": "0.0.1-security",
+    "request": "^2.79.0",
+    "scrape-it": "^3.2.2"
   }
 }
