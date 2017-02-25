@@ -34,9 +34,8 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
             let text = event.message.text.substring(0, 200)
-            //sendTextMessage(sender, "Text received, echo: " + text)
             const messageText = getMessageText();
-            sendTextMessage(sender, "received: " + text + '\n' + messageText);
+            sendTextMessage(sender, messageText);
         }
     }
     res.sendStatus(200)
@@ -84,7 +83,7 @@ function writeToFile({path, content}) {
 function getMessageText() {
   const database = JSON.parse(fs.readFileSync(PATH));
   const data = randomElement(database);
-  return JSON.stringify(data);
+  return JSON.stringify(data, null, '\t');
 }
 
 function randomElement(arr) {
