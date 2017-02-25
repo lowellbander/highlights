@@ -70,7 +70,7 @@ function sendTextMessage(sender, text) {
 
 // END BOILERPLATE
 
-const PATH = './test.txt'
+const PATH = './database.json'
 
 function writeToFile({path, content}) {
   fs.writeFile(path, content, function(err) {
@@ -82,11 +82,12 @@ function writeToFile({path, content}) {
 }
 
 function getMessageText() {
-  return fs.readFileSync(PATH)
+  const database = JSON.parse(fs.readFileSync(PATH));
+  const data = randomElement(database);
+  return JSON.stringify(data);
 }
 
-//const foo = {a:4, b:5};
-
-//writeToFile({path: './test.txt', content: JSON.stringify(foo)});
-//writeToFile({path: './test.txt', content: new Date()});
+function randomElement(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
