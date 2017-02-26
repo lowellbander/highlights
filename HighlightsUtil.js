@@ -3,15 +3,11 @@
 const cheerio = require('cheerio');
 const fs = require('fs');
 const scrapeIt = require('scrape-it');
-
 const {log} = console;
 
 const inFilename = process.argv[2];
-
 const contents = fs.readFileSync(inFilename, {encoding: 'utf8'});
-
-let $ = cheerio.load(contents);
-
+const $ = cheerio.load(contents);
 const parsed = scrapeIt.scrapeHTML($, {
   highlights: {
     listItem: '.highlight',
@@ -33,13 +29,10 @@ const parsed = scrapeIt.scrapeHTML($, {
     },
   },
 });
-
 const highlights = parsed.highlights;
 const bucketSizes = parsed.meta.map(_ => _.nHighlights);
 const bucketed = bucketHighlights(highlights, bucketSizes);
-
 const database = createDatabase(bucketed, parsed.meta);
-
 fs.writeFileSync('database.json', JSON.stringify(database, null, '\t'));
 
 function createDatabase(bucketed, meta) {
