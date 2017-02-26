@@ -6,7 +6,9 @@ const scrapeIt = require('scrape-it');
 
 const {log} = console;
 
-const contents = fs.readFileSync('biggerHighlights.htm', {encoding: 'utf8'});
+const inFilename = process.argv[2];
+
+const contents = fs.readFileSync(inFilename, {encoding: 'utf8'});
 
 let $ = cheerio.load(contents);
 
