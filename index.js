@@ -34,13 +34,12 @@ app.post('/webhook/', function (req, res) {
   res.sendStatus(200)
 })
 
-
 app.listen(app.get('port'), function() {
-    console.log('running on port', app.get('port'))
+  console.log('running on port', app.get('port'))
 })
 
 function sendTextMessage(sender, text) {
-  const token = "EAAQ1j7TjxHUBAGZCJiNp8u5xqai1LZBVZCoRO4IE6RXVR2ba35IUFA2UzaOBcJf7gME3d56LJXy7JtM2LMok0vSWoXQwDuvMHtZA2qBChDoCc8O2uM8WRFibpIVvyosSZCk6DWHchghwE3gfxivkrvBHuPe2ZCAHYU4Eic7MTIoAZDZD";
+  const token = 'EAAQ1j7TjxHUBAGZCJiNp8u5xqai1LZBVZCoRO4IE6RXVR2ba35IUFA2UzaOBcJf7gME3d56LJXy7JtM2LMok0vSWoXQwDuvMHtZA2qBChDoCc8O2uM8WRFibpIVvyosSZCk6DWHchghwE3gfxivkrvBHuPe2ZCAHYU4Eic7MTIoAZDZD';
   const messageData = {text: text};
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
